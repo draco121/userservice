@@ -1,4 +1,4 @@
-module userservice
+module github.com/draco121/userservice
 
 go 1.21.5
 

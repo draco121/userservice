@@ -2,7 +2,7 @@ package core
 
 import (
 	"context"
-	"userservice/repository"
+	"github.com/draco121/userservice/repository"
 
 	"github.com/draco121/common/models"
 

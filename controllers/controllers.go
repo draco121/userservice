@@ -1,7 +1,8 @@
 package controllers
 
 import (
-	"userservice/core"
+	"github.com/draco121/common/constants"
+	"github.com/draco121/userservice/core"
 
 	"github.com/draco121/common/models"
 
@@ -20,7 +21,7 @@ func NewControllers(service core.IUserService) Controllers {
 	return c
 }
 
-func (s *Controllers) CreateUser(c *gin.Context) {
+func (s *Controllers) CreateTenant(c *gin.Context) {
 	var user models.User
 	if c.ShouldBind(&user) != nil {
 		c.JSON(400, gin.H{
@@ -28,7 +29,29 @@ func (s *Controllers) CreateUser(c *gin.Context) {
 		})
 	} else {
 		user.ID = primitive.NewObjectID()
-		user.Role = models.Tenant
+		user.Role = constants.Tenant
+		res, err := s.service.CreateUser(c.Request.Context(), &user)
+		if err != nil {
+			c.JSON(400, gin.H{
+				"message": err.Error(),
+			})
+		} else {
+			c.JSON(201, gin.H{
+				"result": res,
+			})
+		}
+	}
+}
+
+func (s *Controllers) CreateTenantAdmin(c *gin.Context) {
+	var user models.User
+	if c.ShouldBind(&user) != nil {
+		c.JSON(400, gin.H{
+			"message": "data validation error",
+		})
+	} else {
+		user.ID = primitive.NewObjectID()
+		user.Role = constants.TenantAdmin
 		res, err := s.service.CreateUser(c.Request.Context(), &user)
 		if err != nil {
 			c.JSON(400, gin.H{

@@ -1,19 +1,19 @@
 package main
 
 import (
-	"userservice/controllers"
-	"userservice/core"
-	"userservice/repository"
-	"userservice/routes"
-
 	"github.com/draco121/common/database"
+	"github.com/draco121/userservice/controllers"
+	"github.com/draco121/userservice/core"
+	"github.com/draco121/userservice/repository"
+	"github.com/draco121/userservice/routes"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
 func RunApp() {
-	db := database.NewMongoDatabaseDefaults()
+	db := database.NewMongoDatabase(os.Getenv("MONGODB_URI"), os.Getenv("MONGODB_DBNAME"))
 	repo := repository.NewUserRepository(db)
 	service := core.NewUserService(repo)
 	controllers := controllers.NewControllers(service)
