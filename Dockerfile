@@ -23,4 +23,4 @@ COPY --from=builder /app/myapp /app/myapp
 EXPOSE 80
 
 # Command to run the executable
-CMD ["./myapp"]
+CMD ["./userservice"]
