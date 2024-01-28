@@ -5,7 +5,7 @@ go 1.21.5
 toolchain go1.21.6
 
 require (
-	github.com/draco121/common v0.0.0-20240127175523-bf11fd0c3853
+	github.com/draco121/common v0.0.0-20240128124731-014b3d780745
 	github.com/gin-gonic/gin v1.9.1
 	github.com/joho/godotenv v1.5.1
 	go.mongodb.org/mongo-driver v1.13.1
